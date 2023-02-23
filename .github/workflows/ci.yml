@@ -5,34 +5,31 @@ on:
     branches: ["main"]
 
 jobs:
-  build:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@2 
         with:
-        java-version: '12.x'
+          java-version: '12.x'
       - uses: subosito/flutter-action@v2
         with:
           flutter_version: '3.7.4'
       - run: flutter pub get
-      - run: flutter build apk 
-  
-    - name: Create github artifact relase
+      - run: flutter build apk
+      - name: Create github artifact release
         uses: ncipollo/relase-action@v1
-          with:
-            artifacts: "build/app/outputs/apk/release/*.apk, build/app/outputs/bundle/release/app-release.aab"
-            token: ${{ secrets.GITHUB_TOKEN }}
-            commit:
-    - name: Upload app bundle artifact
+        with:
+          artifacts: "build/app/outputs/apk/release/*.apk, build/app/outputs/bundle/release/app-release.aab"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit: main
+      - name: Upload app bundle artifact
         uses: actions/upload-artifact@v2
-          with:
-            name: appbundle
-              path: build/app/outputs/bundle/relase/app-relase.aab
-    
-    -name: Run Fastlane
-      uses: maierj/fastlane-action@v1.4.0
-        with: 
+        with:
+          name: appbundle
+          path: build/app/outputs/bundle/relase/app-relase.aab
+      - name: Run Fastlane
+        uses: maierj/fastlane-action@v1.4.0
+        with:
           lane: deploy
           subdirectory: android

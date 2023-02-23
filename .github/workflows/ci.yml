@@ -3,7 +3,9 @@ name: learn-github-actions
 on:
   push: 
     branches: ["main"]
-
+    tags:  
+      - '*'
+    
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
@@ -22,7 +24,7 @@ jobs:
         with:
           artifacts: "build/app/outputs/apk/release/*.apk, build/app/outputs/bundle/release/app-release.aab"
           token: ${{ secrets.GITHUB_TOKEN }}
-          tags:  '*'
+          
           commit: main
       - name: Upload app bundle artifact
         uses: actions/upload-artifact@v2

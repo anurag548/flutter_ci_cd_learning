@@ -22,7 +22,7 @@ jobs:
         flutter-version: '3.7.4'
     - run: flutter pub get
     - run: flutter test
-    - run: flutter build aab
+    - run: flutter build appbundle
         
         
       

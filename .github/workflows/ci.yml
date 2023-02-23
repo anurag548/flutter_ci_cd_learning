@@ -18,7 +18,6 @@ jobs:
       - run: flutter pub get
       - run: flutter build apk 
   
-  save_artifacts:
     - name: Create github artifact relase
         uses: ncipollo/relase-action@v1
           with:

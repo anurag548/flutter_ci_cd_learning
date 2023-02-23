@@ -3,8 +3,9 @@ name: learn-github-actions
 on:
   push: 
     branches: ["main"]
+  create:
     tags:  
-      - '*'
+      - v*
     
 jobs:
   check-bats-version:

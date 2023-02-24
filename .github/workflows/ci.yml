@@ -35,8 +35,16 @@ jobs:
           name: appbundle
           path: build/app/outputs/bundle/relase/app-relase.aab
       - name: instal firebase cli
-        run: npm install -g firebase-tools
-      - name: Bundle install fastlane
-        run: cd android && bundle install
-      - name: Distribute by App Distribution
-        run: cd android && bundle exec fastlane app_distribution_dev
+        run: npm install -g firebase-
+      - name: Prequisites for fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+      - name: Fastlane Action
+        uses: maierj/fastlane-action@v3.0.0
+        with:
+          lane: deploy
+          subdirectory: android
+ 
+ 

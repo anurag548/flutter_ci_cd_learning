@@ -24,7 +24,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/apk/release/*.apk, build/app/outputs/bundle/release/app-release.aab"
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           commit: main
           tag: artifact
       - name: Upload app bundle artifact

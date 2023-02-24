@@ -20,7 +20,7 @@ jobs:
         with:
           flutter_version: '3.7.4'
       - run: flutter pub get
-      - run: flutter build apk
+      #- run: flutter build apk
       - name: Create github artifact release
         uses: ncipollo/release-action@v1
         with:
@@ -35,7 +35,7 @@ jobs:
           name: appbundle
           path: build/app/outputs/bundle/relase/app-relase.aab
       - name: instal firebase cli
-        run: npm install -g firebase-
+        run: npm install -g firebase-cli
       - name: Prequisites for fastlane
         uses: ruby/setup-ruby@v1
         with:

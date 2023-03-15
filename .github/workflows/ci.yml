@@ -6,7 +6,7 @@ on:
   create:
     tags:  
       - v*
-    
+  
 jobs:
   check-bats-version:
     permissions: write-all

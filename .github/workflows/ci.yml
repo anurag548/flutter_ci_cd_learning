@@ -1,55 +1,55 @@
-name: learn-github-actions
+# name: learn-github-actions
 
-on:
-  push: 
-    branches: ["main"]
-  create:
-    tags:  
-      - v*
+# on:
+#   push: 
+#     branches: ["main"]
+#   create:
+#     tags:  
+#       - v*
   
-jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
-    permissions: write-all
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1 
-        with:
-          java-version: '12.x'
-          distribution: 'oracle'
-          cache: 'gradle'
-      - uses: subosito/flutter-action@v1
-        with:
-          flutter-version: '3.7.7'
-          channel: 'stable'
-          cache: true
-      - run: flutter pub get
-      - run: flutter build apk
-      - name: Create github artifact release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/apk/release/*.apk, build/app/outputs/bundle/release/app-release.aab"
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit: main
-          tag: artifact
-          skipIfReleaseExists: true
-      - name: Upload app bundle artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: appbundle
-          path: build/app/outputs/bundle/relase/app-relase.aab
-      - name: instal firebase cli
-        run: npm install -g firebase-cli
-      - name: Prequisites for fastlane
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.0'
-          bundler-cache: true
-          working-directory: android
-      - name: Fastlane Action
-        uses: maierj/fastlane-action@v3.0.0
-        with:
-          lane: deploy
-          subdirectory: android
+# jobs:
+#   check-bats-version:
+#     runs-on: ubuntu-latest
+#     permissions: write-all
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-java@v1 
+#         with:
+#           java-version: '12.x'
+#           distribution: 'oracle'
+#           cache: 'gradle'
+#       - uses: subosito/flutter-action@v1
+#         with:
+#           flutter-version: '3.7.7'
+#           channel: 'stable'
+#           cache: true
+#       - run: flutter pub get
+#       - run: flutter build apk
+#       - name: Create github artifact release
+#         uses: ncipollo/release-action@v1
+#         with:
+#           artifacts: "build/app/outputs/apk/release/*.apk, build/app/outputs/bundle/release/app-release.aab"
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           commit: main
+#           tag: artifact
+#           skipIfReleaseExists: true
+#       - name: Upload app bundle artifact
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: appbundle
+#           path: build/app/outputs/bundle/relase/app-relase.aab
+#       - name: instal firebase cli
+#         run: npm install -g firebase-cli
+#       - name: Prequisites for fastlane
+#         uses: ruby/setup-ruby@v1
+#         with:
+#           ruby-version: '3.0'
+#           bundler-cache: true
+#           working-directory: android
+#       - name: Fastlane Action
+#         uses: maierj/fastlane-action@v3.0.0
+#         with:
+#           lane: deploy
+#           subdirectory: android
  
  

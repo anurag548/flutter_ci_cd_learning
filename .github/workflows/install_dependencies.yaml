@@ -3,14 +3,14 @@ on:
   push:
     branches: 
       - main
-strategy:
-  matrix:
-    os: [ubuntu-latest, macos-latest]
 
 
 jobs:
   flutter_install:
     name: Install Flutter
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
